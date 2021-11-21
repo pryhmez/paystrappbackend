@@ -1,0 +1,32 @@
+
+html(style=('overflow:hidden;'))
+  body(style=('overflow:none;margin:0px;height:100%'))
+
+    form(action=creditLink, method="post", id="n")
+      article
+        body(style='margin:0px;height:100%')
+          div(style='display:flex;justify-content:space-between;height:100%')
+            img(src='/uploads/sideimg.png' style='width:50%; height:100%;')
+            div(style='height:3000px; width:100%;background-color:#ffffff; text-align:center; padding-top:50px')
+              img(src='/uploads/payimg.png'  style='width:200px; height:200px; margin-top:20px')
+              p(style='font-size:30px; text-align:center; font-family:pavanam, sans-serif; font-weight:bold') Skada Delivery Services
+              b
+              script(
+              src="//checkout.stripe.com/v2/checkout.js",
+              class="stripe-button",
+              data-key=keyPublishable,
+              data-locale="auto",
+              data-description="Delivery Charge",
+              data-amount=dispAmount,
+              date-name="Skada",
+              date-image,
+              data-currency="ngn")
+              article
+              p
+              label(id="name" style='font-family:pavanam, sans-serif; font-weight:bold') Total Amount: $5.00 
+              script(type="module" ).
+                let value = "Total Amount: NGN" + "#{amount}"
+                document.getElementById("name").innerHTML= value 
+                 
+                       
+              
