@@ -45,7 +45,7 @@ module.exports = function dataController() {
             .send({
               successful: false,
               message: "Email does not exist in our Database, please sign up",
-              data: req.body,
+              data: req.body.email,
             })
             .end();
           return;
