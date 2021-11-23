@@ -84,7 +84,7 @@ module.exports = function dataController() {
               successful: false,
               message:
                 "login failed, please enter correct Username and password",
-              data: req.body,
+              data: req.body.email,
             });
           }
         });
