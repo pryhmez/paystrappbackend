@@ -32,6 +32,7 @@ const setUserTransactionPin = async function (data, pinHash) {
         {transactionPin: pinHash},
         {new: true}
     );
+
     return user;
 }
 

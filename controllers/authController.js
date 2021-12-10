@@ -149,7 +149,21 @@ module.exports = function dataController() {
     bcrypt.hash(req.body.pin, 10, (err, hash) => {
       setUserTransactionPin(req.body, hash).then((result) => {
         console.log(result);
+        if (result) {
+          res.status(200).send({
+            successful: true,
+            message: "Transaction Pin added successfully",
+            data: result,
+          });
+        }else {
+          res.status(400).send({
+            success: false,
+            message: "Something went wrong",
+            data: result
+          })
+        }
       });
     });
   };
+
 };

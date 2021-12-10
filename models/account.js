@@ -11,7 +11,6 @@ var AccountSchema = new Schema({
 	transactionPin: {
 		type: String,
 		trim: true,
-		
 	},
 
 	email: {
@@ -22,6 +21,24 @@ var AccountSchema = new Schema({
 		unique: true
 	},
 
+	accountName: {
+		type: String,
+		required: true,
+		lowercase: true,
+	},
+
+	accountNo: {
+		type: String,
+		required: true,
+		lowercase: true,
+	},
+
+	bank: {
+		type: Object,
+		required: true,
+		lowercase: true,
+	},
+
 	walletBalance: {
 		type: String,
 		required: true,
@@ -29,16 +46,11 @@ var AccountSchema = new Schema({
 		default: "0"
 	},
 
-	timer: {
-		type: String,
-		required: true,
-		trim: truef
-	},
-
 	transactionLog: [
 		{
 			type: { type: String},
-			time: { type: Date, default: new Date().now},
+			details: { type: Object},
+			time: { type: Date, default: new Date().getTime()},
 			amount: { type: String},
 			walletBalanceAfter: { type: String}
 		}
