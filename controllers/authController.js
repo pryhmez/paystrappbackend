@@ -95,6 +95,55 @@ module.exports = function dataController() {
       });
   };
 
+  this.getUserProfile = (req, res, next) => {
+    signInUser(req.body)
+    .then((user) => {
+
+      if (!user) {
+        res
+        .status(401)
+        .send({
+          successful: false,
+          message: "Email does not exist in our Database, please sign up",
+          data: req.body.email,
+        })
+        .end();
+        return;
+      }
+      
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+            res.status(401).send(errors.errors);
+          } else {
+            const token = jwt.sign(
+              {
+                email: user.email,
+                userId: user._id,
+                emailVerified: user.emailVerified,
+                phoneVerified: user.phoneVerified,
+              },
+              process.env.JWTSECRET,
+              {
+                expiresIn: "6h",
+              }
+            );
+
+            res.status(200).json({
+              status: true,
+              message: "login successful",
+              token: token,
+              user: user,
+            });
+          } 
+
+      })
+      .catch((error) => {
+        // return next(new AppError(error, 500));
+        console.log(error)
+        res.status(500).send(error);
+      });
+  }
+
   this.sendVerification = (req, res, next) => {
     let val = Math.floor(100000 + Math.random() * 900000);
     console.log(val, req.body);

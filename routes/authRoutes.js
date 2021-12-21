@@ -12,6 +12,7 @@ module.exports = function() {
 
   router.post("/signup", authCtl.signUp);
   router.post("/signin", authCtl.signIn);
+  router.post("/getuserprofile", authCtl.getUserProfile)
   router.post('/settransactionpin', authCtl.setTransactionPin);
   router.post("/verifyemail", authCtl.sendVerification);
   router.post("/emailconfirm", authCtl.emailTokenConfirmation)

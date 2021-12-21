@@ -1,6 +1,7 @@
 let onlineUsers = [];
 
 const { getTimeSlot } = require('../services/timeSlotServices');
+const { modifyWalletBalance } = require('../services/transactionServices');
 
 
 
@@ -28,7 +29,15 @@ const connection = function (client) {
 
 
   client.on("data", (data, cb) => {
-    console.data(data);
+    // console.data(data);
+  })
+  
+  client.on("VIEW", (data, cb) => {
+    
+    console.log(client.id)
+    console.log(data, onlineUsers, parseFloat(data.viewTime) * 0.0000092593);
+
+    modifyWalletBalance({userId: data.userId, value: data.viewTime * 0.0000092593}, "+")
   })
 
 
