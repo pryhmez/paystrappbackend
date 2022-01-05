@@ -62,6 +62,13 @@ var UserSchema = new Schema({
 		default: "0"
 	},
 
+	referralCode: {
+		type: String,
+		required: true,
+		trim: true,
+		default: Math.floor(100000 + Math.random() * 900000) 
+	},
+
 	createdDate: { type: Date, default: new Date().getTime() },
 
 });

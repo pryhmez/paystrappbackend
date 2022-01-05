@@ -38,6 +38,7 @@ module.exports = function dataController() {
   this.signIn = (req, res, next) => {
     signInUser(req.body)
       .then((user) => {
+        console.log(user)
         if (!user) {
           // return next(new AppError('Email does not exist in our Database, please sign up', 401));
           res
