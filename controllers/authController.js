@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
+const refId = require("randomstring");
 
 const {
   signUpUser,
@@ -9,15 +10,17 @@ const {
   signInUser,
   setUserTransactionPin,
   sendVerification,
-  emailTokenConfirmation
+  emailTokenConfirmation,
+  getReferralId
 } = require("../services/authServices");
 const { sendVerificationMail } = require("../config/nodemailer");
 
 module.exports = function dataController() {
   //registers a student
   this.signUp = (req, res, next) => {
+    
     bcrypt.hash(req.body.password, 10, (err, hash) => {
-      signUpUser(req.body, hash)
+      signUpUser(req.body, hash, refId.generate(7))
         .then((result) => {
           res.send({
             success: true,
@@ -216,4 +219,13 @@ module.exports = function dataController() {
     });
   };
 
+  this.getReferralId = (req, res, next) => {
+
+    getReferralId(req.body.userId).then(result => {
+
+      
+    })
+  }
+
 };
+

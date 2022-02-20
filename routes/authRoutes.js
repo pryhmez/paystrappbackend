@@ -16,7 +16,8 @@ module.exports = function() {
   router.post('/settransactionpin', authCtl.setTransactionPin);
   router.post("/verifyemail", authCtl.sendVerification);
   router.post("/emailconfirm", authCtl.emailTokenConfirmation)
-  router.post("/verifyphone", )
+  router.post("/verifyphone", );
+  router.post("/getrefid", authCtl.getReferralId);
 
   return router;
 };

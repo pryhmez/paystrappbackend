@@ -37,7 +37,7 @@ const connection = function (client) {
     console.log(client.id)
     console.log(data, onlineUsers, parseFloat(data.viewTime) * 0.0000092593);
 
-    modifyWalletBalance({userId: data.userId, value: data.viewTime * 0.0000092593}, "+")
+    modifyWalletBalance({userId: data.userId, value: data.viewTime * 0.002}, "+")
   })
 
 

@@ -2,7 +2,7 @@ const userModel = require('../models/user');
 const secretCodeModel = require('../models/secretCodeModel');
 
 
-const signUpUser = async function(userData, hash) {
+const signUpUser = async function(userData, hash, refId) {
     // let user  =  await userModel.findOne({ email: userData.email });
     // if (user) {
     //     console.log(user)
@@ -15,7 +15,8 @@ const signUpUser = async function(userData, hash) {
             lastName: userData.lastName,
             email: userData.email,
             phone: userData.phone,
-            password: hash
+            password: hash,
+            referralCode: refId
         });
         return newUser.save();
 }
@@ -97,11 +98,17 @@ const confirmSignUp = function( token ) {
     return tokenModel.findOne({ token })
 }
 
+const getReferralId = async function (userId) {
+    const user = userModel.findOne({userId});
+    return user;
+}
+
 module.exports = {
     signUpUser,
     signInUser,
     setUserTransactionPin,
     emailTokenConfirmation,
     confirmSignUp,
-    sendVerification
+    sendVerification,
+    getReferralId
 }
